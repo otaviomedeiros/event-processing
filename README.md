@@ -10,3 +10,4 @@
 Inside live/stage folder:
 
 - terraform state list
+- terraform force-unlock <LockID>
