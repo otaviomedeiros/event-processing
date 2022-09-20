@@ -27,7 +27,7 @@ locals {
 
 module "sqs" {
   source = "../../modules/sqs"
-  env = local.env
+  env    = local.env
 }
 
 # module "api_gateway" {
