@@ -30,15 +30,9 @@ module "sqs" {
   env    = local.env
 }
 
-# module "api_gateway" {
-#   source = "../modules/api_gateway"
-#   env    = local.env
-#   region = var.region
-#   queue  = module.sqs.queue
-# }
-
-# module "lambda_function" {
-#   source = "../modules/lambda"
-#   env    = local.env
-#   queue  = module.sqs.queue 
-# }
+module "api_gateway" {
+  source = "../../modules/api_gateway"
+  env    = local.env
+  region = var.region
+  queue  = module.sqs.queue
+}
