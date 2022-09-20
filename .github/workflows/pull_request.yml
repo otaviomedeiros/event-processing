@@ -30,7 +30,6 @@ jobs:
         run: |
           cd live/stage
           terraform init
-          terraform state list
           terraform plan
 
     
