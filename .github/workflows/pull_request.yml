@@ -18,4 +18,9 @@ jobs:
 
       - name: Terraform Format Check
         run: terraform fmt -recursive -check
+
+      - name: Terraform Init
+        run: |
+          cd live/stage
+          terraform init
     
