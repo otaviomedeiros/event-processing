@@ -26,7 +26,7 @@ locals {
 }
 
 module "sqs" {
-  source = "../modules/sqs"
+  source = "../../modules/sqs"
   env    = local.env
 }
 
