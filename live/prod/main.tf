@@ -36,3 +36,8 @@ module "api_gateway" {
   region = var.region
   queue  = module.sqs.queue
 }
+
+module "lambda" {
+  source = "../../modules/lambda"
+  env    = local.env
+}
