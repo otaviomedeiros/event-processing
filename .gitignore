@@ -13,3 +13,4 @@
 *.tfvars.json
 
 *.lock.hcl
+**/lambda/dist
