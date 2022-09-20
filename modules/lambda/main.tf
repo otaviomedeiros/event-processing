@@ -26,7 +26,7 @@ data "archive_file" "lambda_with_dependencies" {
 
 resource "aws_lambda_function" "events_processing" {
   filename         = data.archive_file.lambda_with_dependencies.output_path
-  function_name    = "events-processing"
+  function_name    = "events-processing-${var.env}"
   role             = aws_iam_role.events_processing.arn
   handler          = "index.handler"
   source_code_hash = data.archive_file.lambda_with_dependencies.output_base64sha256
