@@ -39,5 +39,5 @@ module "api_gateway" {
 
 module "lambda" {
   source = "../../modules/lambda"
-  env = local.env
+  env    = local.env
 }

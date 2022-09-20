@@ -20,15 +20,15 @@ resource "aws_iam_role" "events_processing" {
 
 data "archive_file" "lambda_with_dependencies" {
   type        = "zip"
-  source_dir = "${path.module}/src"
+  source_dir  = "${path.module}/src"
   output_path = "${path.module}/dist/files/events-processing.zip"
 }
 
 resource "aws_lambda_function" "events_processing" {
-  filename      = data.archive_file.lambda_with_dependencies.output_path
-  function_name = "events-processing"
-  role          = aws_iam_role.events_processing.arn
-  handler       = "index.handler"
+  filename         = data.archive_file.lambda_with_dependencies.output_path
+  function_name    = "events-processing"
+  role             = aws_iam_role.events_processing.arn
+  handler          = "index.handler"
   source_code_hash = data.archive_file.lambda_with_dependencies.output_base64sha256
 
   runtime = "nodejs16.x"
