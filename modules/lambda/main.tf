@@ -18,6 +18,11 @@ resource "aws_iam_role" "events_processing" {
   EOF
 }
 
+resource "aws_iam_role_policy_attachment" "basic_lambda" {
+  role       = aws_iam_role.events_processing.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
 data "archive_file" "lambda_with_dependencies" {
   type        = "zip"
   source_dir  = "${path.module}/src"
