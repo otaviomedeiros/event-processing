@@ -3,7 +3,7 @@ exports.handler = async (event) => {
 
   event.Records.forEach(record => {
     const { body } = record;
-    console.log(`Event => ${body}`);
+    console.log(`Event => ${JSON.parse(body)}`);
   })
 
   const response = {
