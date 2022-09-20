@@ -9,6 +9,6 @@ variable "region" {
 variable "queue" {
   type = object({
     name = string
-    arn = string
+    arn  = string
   })
 }

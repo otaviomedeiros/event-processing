@@ -20,13 +20,13 @@ resource "aws_api_gateway_method" "event_post_method" {
 }
 
 resource "aws_api_gateway_integration" "event_post_integration" {
-  rest_api_id          = aws_api_gateway_rest_api.api_gateway.id
-  resource_id          = aws_api_gateway_resource.event_resource.id
-  http_method          = aws_api_gateway_method.event_post_method.http_method
-  type                 = "AWS"
+  rest_api_id             = aws_api_gateway_rest_api.api_gateway.id
+  resource_id             = aws_api_gateway_resource.event_resource.id
+  http_method             = aws_api_gateway_method.event_post_method.http_method
+  type                    = "AWS"
   integration_http_method = "POST"
-  uri = "arn:aws:apigateway:${var.region}:sqs:path/${var.queue.name}"
-  credentials             = aws_iam_role.api_events_resource_role.arn 
+  uri                     = "arn:aws:apigateway:${var.region}:sqs:path/${var.queue.name}"
+  credentials             = aws_iam_role.api_events_resource_role.arn
 
   request_parameters = {
     "integration.request.header.Content-Type" = "'application/x-www-form-urlencoded'"
@@ -95,7 +95,7 @@ resource "aws_iam_role_policy_attachment" "api_events_resource_logs_policy" {
 }
 
 resource "aws_iam_policy" "api_sqs_policy" {
-  name        = "api_events_sqs_policy-${var.env}"
+  name = "api_events_sqs_policy-${var.env}"
 
   policy = jsonencode({
     Version = "2012-10-17"
