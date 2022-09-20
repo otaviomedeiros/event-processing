@@ -71,7 +71,7 @@ resource "aws_lambda_permission" "allows_sqs_to_trigger_lambda" {
 
 resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   batch_size       = 1
-  event_source_arn =  var.queue.arn
+  event_source_arn = var.queue.arn
   enabled          = true
-  function_name    =  aws_lambda_function.events_processing.arn
+  function_name    = aws_lambda_function.events_processing.arn
 }
