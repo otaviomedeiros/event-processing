@@ -4,8 +4,8 @@ on:
   pull_request:
 
 jobs:
-  terraform:
-    name: "Terraform Plan"
+  terraform-staging:
+    name: "Terraform Plan Staging"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +29,34 @@ jobs:
           TF_VAR_region: us-west-2
         run: |
           cd live/stage
+          terraform init
+          terraform plan
+  
+  terraform-production:
+    name: "Terraform Plan Production"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.0
+
+      - name: Terraform Format Check
+        run: terraform fmt -recursive -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_region: us-west-2
+        run: |
+          cd live/prod
           terraform init
           terraform plan
 
